@@ -1,5 +1,3 @@
-//  Description: This is the main script file for the project. It contains all the JavaScript code for the project.
-
 // Toasts
 function showToast({ title, message, type, duration }) {
   // Check if there is an existing toast
@@ -57,7 +55,8 @@ function showToast({ title, message, type, duration }) {
   // Create the progress bar
   const progressBar = document.createElement('div');
   progressBar.classList.add('toast__progress');
-  progressBar.style.width = '100%';
+  progressBar.classList.add(`toast__progress--${type}`);
+  progressBar.style.width = 'calc(100% - 20px)'; // Subtract 20px for gutter
   toast.appendChild(progressBar);
 
   let intervalId;
@@ -71,13 +70,12 @@ function showToast({ title, message, type, duration }) {
     }
     const elapsed = Date.now() - start;
     percentComplete = Math.max(0, 100 - (elapsed / duration) * 100);
-    progressBar.style.width = `${percentComplete}%`;
-
+    progressBar.style.width = `calc(${percentComplete}% - 20px)`; // Subtract 20px for gutter
     if (percentComplete <= 0) {
       clearInterval(intervalId);
       closeToast();
     }
-  }, 10);
+  }, 1);
 
   // Append the close button and toast to the body
   toast.appendChild(closeButton);
@@ -86,16 +84,30 @@ function showToast({ title, message, type, duration }) {
   // Function to close the toast and remove it from the DOM with an animation
   function closeToast() {
     clearInterval(intervalId);
-    toast.style.animation = 'fadeOut linear 0.5s';
+    toast.style.animation = 'fadeOut linear 0.1s';
     setTimeout(() => {
       document.body.removeChild(toast);
-    }, 50);
+    }, 5);
   }
 }
 
 showToast({
   title: 'Success!',
   message: 'Your action was successful.',
-  type: 'warning',
-  duration: 3000,
+  type: 'error',
+  duration: 4000,
 });
+
+// showToast({
+//   title: 'Success!',
+//   message: 'Your action was successful.',
+//   type: 'warning',
+//   duration: 4000,
+// });
+
+// showToast({
+//   title: 'Success!',
+//   message: 'Your action was successful.',
+//   type: 'success',
+//   duration: 4000,
+// });
