@@ -94,6 +94,20 @@ function showToast({ title, message, type, duration }) {
 showToast({
   title: 'Success!',
   message: 'Your action was successful.',
-  type: 'warning',
+  type: 'error',
   duration: 4000,
 });
+
+// showToast({
+//   title: 'Success!',
+//   message: 'Your action was successful.',
+//   type: 'warning',
+//   duration: 4000,
+// });
+
+// showToast({
+//   title: 'Success!',
+//   message: 'Your action was successful.',
+//   type: 'success',
+//   duration: 4000,
+// });
